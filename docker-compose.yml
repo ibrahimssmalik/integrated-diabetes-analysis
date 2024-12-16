@@ -1,0 +1,28 @@
+version: '3.8'
+
+services:
+
+  database:
+    image: postgres:latest
+    container_name: postgresdb_container
+    ports:
+      - "5432:5432"
+    env_file:
+      - postgresql.env
+    volumes:
+      - dbdata:/var/lib/postgresql/data
+
+  mongodb:
+    image: mongo:latest
+    container_name: mongodb_container
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=dap
+      - MONGO_INITDB_ROOT_PASSWORD=dap
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongo_data:/data/db
+
+volumes:
+  dbdata:
+  mongo_data:
